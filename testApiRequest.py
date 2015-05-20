@@ -45,10 +45,9 @@ for stop in all_stops:
 		scheduled_departure = ad_data['scheduledDepartureTime']
 
 		print('\t' + route_name + ': ' + trip_sign + ' {')
-		# print('\tArrival Lateness: ')
-		# print(predicted_arrival - scheduled_arrival)
-		# print('\tArrival Lateness: ')
-		# print(predicted_departure - scheduled_departure)
+		print('\tPredicted arrival: ' + predicted_arrival)
+		print('\Scheduled arrival: ' + scheduled_arrival)
+		# predicted - sheduled gives positive lateness and negative for being early
 		print('\t}')
 
 	print('}')
