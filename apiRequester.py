@@ -30,8 +30,8 @@ while True:
 	print('number of stops: ' + str(len(all_stops)) + '\n')
 
 	# grab specific stops
+	# for stop in all_stops[0:5]:
 	for stop in all_stops:
-
 		print('Stop: ' + stop + ' {')
 
 		# get all data from arrivals-and-departures-for-stop method for current stop
