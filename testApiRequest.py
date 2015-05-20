@@ -37,6 +37,9 @@ for stop in all_stops:
 	ad_response = urllib.urlopen(ad_url)
 	ad = json.loads(ad_response.read())
 
+	# get system time as timestamp
+	current_time = ad['currentTime']
+
 	# get a specific trip near the stop
 	for ad_data in ad['data']['entry']['arrivalsAndDepartures']:
 		route_ID = ad_data['routeId']
