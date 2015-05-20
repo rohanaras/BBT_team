@@ -2,10 +2,24 @@
 # I cant for the life of me figure out what the limit is though
 
 
-import urllib, json, datetime
+import urllib, json, datetime, pyowm
+
+#Open weather map API key
+owm = pyowm.OWM('0f115000897f3bb486fb0cbda58d8056')
+
+# Search for current weather in Seattle
+observation = owm.weather_at_place('Seattle,US')
+w = observation.get_weather()
+print(w)
+
+# Weather details
+print(w.get_wind())
+print(w.get_humidity())
+print(w.get_temperature('fahrenheit'))
 
 # get all stops from stop-ids-for-agency method
 all_stops_url = 'http://api.pugetsound.onebusaway.org/api/where/stop-ids-for-agency/1.json?key=f0d2025d-3221-4cb0-860c-4466ccc1b0b0'
+
 stops_response = urllib.urlopen(all_stops_url)
 all_stops = json.loads(stops_response.read())['data']['list']
 
