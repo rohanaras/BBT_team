@@ -17,11 +17,15 @@ print(w.get_wind())
 print(w.get_humidity())
 print(w.get_temperature('fahrenheit'))
 
+# break in the printed text
+print('\n-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-\n')
+
 # get all stops from stop-ids-for-agency method
 all_stops_url = 'http://api.pugetsound.onebusaway.org/api/where/stop-ids-for-agency/1.json?key=f0d2025d-3221-4cb0-860c-4466ccc1b0b0'
 
 stops_response = urllib.urlopen(all_stops_url)
 all_stops = json.loads(stops_response.read())['data']['list']
+print('number of stops: ' + str(len(all_stops)) + '\n')
 
 # grab specific stops
 for stop in all_stops:
@@ -45,8 +49,8 @@ for stop in all_stops:
 		scheduled_departure = ad_data['scheduledDepartureTime']
 
 		print('\t' + route_name + ': ' + trip_sign + ' {')
-		print('\tPredicted arrival: ' + predicted_arrival)
-		print('\Scheduled arrival: ' + scheduled_arrival)
+		print('\tPredicted arrival: ' + str(predicted_arrival))
+		print('\tScheduled arrival: ' + str(scheduled_arrival))
 		# predicted - sheduled gives positive lateness and negative for being early
 		print('\t}')
 
