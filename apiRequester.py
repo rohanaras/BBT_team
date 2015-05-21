@@ -29,7 +29,7 @@ while True:
 	print('number of stops: ' + str(len(all_stops)) + '\n')
 
 	# grab specific stops (0:10 is for testing purposes)
-	for stop in all_stops[0:10]:
+	for stop in all_stops:
 
 		print('Stop: ' + stop + ' {')
 
@@ -43,7 +43,7 @@ while True:
 
 		# get a specific trip near the stop
 		for ad_data in ad['data']['entry']['arrivalsAndDepartures']:
-			if ad_data['tripStatus']['predicted']:
+			if ad_data['predicted']:
 				route_ID = ad_data['routeId']
 				route_name = ad_data['routeShortName']
 				trip_sign = ad_data['tripHeadsign']
