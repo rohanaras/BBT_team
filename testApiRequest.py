@@ -4,7 +4,7 @@
 
 import urllib, json, datetime, pyowm
 
-#Open weather map API key
+# Open weather map API key
 owm = pyowm.OWM('0f115000897f3bb486fb0cbda58d8056')
 
 # Search for current weather in Seattle
@@ -30,31 +30,31 @@ print('number of stops: ' + str(len(all_stops)) + '\n')
 # grab specific stops
 for stop in all_stops:
 
-	print('Stop: ' + stop + ' {')
+    print('Stop: ' + stop + ' {')
 
-	# get all data from arrivals-and-departures-for-stop method for current stop
-	ad_url = 'http://api.pugetsound.onebusaway.org/api/where/arrivals-and-departures-for-stop/' + stop + '.json?key=f0d2025d-3221-4cb0-860c-4466ccc1b0b0'
-	ad_response = urllib.urlopen(ad_url)
-	ad = json.loads(ad_response.read())
+    # get all data from arrivals-and-departures-for-stop method for current stop
+    ad_url = 'http://api.pugetsound.onebusaway.org/api/where/arrivals-and-departures-for-stop/' + stop + '.json?key=f0d2025d-3221-4cb0-860c-4466ccc1b0b0'
+    ad_response = urllib.urlopen(ad_url)
+    ad = json.loads(ad_response.read())
 
-	# get system time as timestamp
-	current_time = ad['currentTime']
+    # get system time as timestamp
+    current_time = ad['currentTime']
 
-	# get a specific trip near the stop
-	for ad_data in ad['data']['entry']['arrivalsAndDepartures']:
-		route_ID = ad_data['routeId']
-		route_name = ad_data['routeShortName']
-		trip_sign = ad_data['tripHeadsign']
-		trip_ID = ad_data['tripId']
-		predicted_arrival = ad_data['predictedArrivalTime']
-		scheduled_arrival = ad_data['scheduledArrivalTime']
-		predicted_departure = ad_data['predictedDepartureTime']
-		scheduled_departure = ad_data['scheduledDepartureTime']
+    # get a specific trip near the stop
+    for ad_data in ad['data']['entry']['arrivalsAndDepartures']:
+        route_ID = ad_data['routeId']
+        route_name = ad_data['routeShortName']
+        trip_sign = ad_data['tripHeadsign']
+        trip_ID = ad_data['tripId']
+        predicted_arrival = ad_data['predictedArrivalTime']
+        scheduled_arrival = ad_data['scheduledArrivalTime']
+        predicted_departure = ad_data['predictedDepartureTime']
+        scheduled_departure = ad_data['scheduledDepartureTime']
 
-		print('\t' + route_name + ': ' + trip_sign + ' {')
-		print('\tPredicted arrival: ' + str(predicted_arrival))
-		print('\tScheduled arrival: ' + str(scheduled_arrival))
-		# predicted - sheduled gives positive lateness and negative for being early
-		print('\t}')
+        print('\t' + route_name + ': ' + trip_sign + ' {')
+        print('\tPredicted arrival: ' + str(predicted_arrival))
+        print('\tScheduled arrival: ' + str(scheduled_arrival))
+        # predicted - scheduled gives positive lateness and negative for being early
+        print('\t}')
 
-	print('}')
+    print('}')
