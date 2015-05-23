@@ -28,7 +28,7 @@ while True:
     all_stops = json.loads(stops_response.read())['data']['list']
     print('number of stops: ' + str(len(all_stops)) + '\n')
 
-    # grab specific stops (0:10 is for testing purposes)
+    # grab specific stops
     for stop in all_stops:
 
         print('Stop: ' + stop + ' {')
