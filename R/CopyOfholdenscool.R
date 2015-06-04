@@ -67,7 +67,24 @@ means <- tapply(data$delay_minutes, data$timehourly,mean)
 points(means,col="red",pch=18)
 
 # analysis on time series: https://media.readthedocs.org/pdf/a-little-book-of-r-for-time-series/latest/a-little-book-of-r-for-time-series.pdf
+# build data frame to store the time in hour (timehourly) and delay in minutes (delay_minutes)
+df <- data.frame(data$timehourly, data$delay_minutes)
 
+# split data into a list by the time  
+out <- split(df, f=df$data.timehourly)
+
+# save delay in minutes data into sample_11am
+sample_11am <- out[[12]]$data.delay_minutes
+# save all delay in minutes for 
+sample_5pm <- out[[18]]$data.delay_minutes
+
+# welch two sample t test, p-value < 2.2e-16
+# the mean of delay in minutes at 11am and 6pm are significantly different
+# we can say that
+t.test(sample_11am, sample_5pm)
+
+# p-value < 2.2e-16
+t.test(sample_5pm$data.delay_minutes, data$delay_minutes)
 
 # class of average delay is character, and need to convert to date time in R 
 class(mydata$avg_delay)
