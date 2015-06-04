@@ -1,0 +1,6 @@
+ls
+x <- 1
+y <- 2
+x + y
+f = read.csv('geo_IDs.csv')
+plot(f$max_x, f$max_y)
