@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>This will take forever</title>
+    <style>
+      html, body, #map-canvas {
+        height: 100%;
+        margin: 0px;
+        padding: 0px
+      }
+      #input {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        z-index: 100;
+        background: rgba(255, 255, 255, .6);
+        padding: 10px;
+        text-align: center;
+      }
+      #range {
+        width: 300px;
+      }
+      #current-value {
+        font-size: 24px;
+      }
+    </style>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
+  </head>
+  <body>
+    <div id="input">
+      <p><span id="current-value">12 am</span></p>
+      <input type="range" min=0 max=23 id="range" value=0>
+    </div>
+    <div id="map-canvas"></div>
+    <script src="./bInfo.js"></script>
+    <script src="./optimizedData.js"></script>
+    <script src="./app.js"></script>
+  </body>
+</html>
