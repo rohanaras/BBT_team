@@ -61,3 +61,8 @@ delayforecasts2$SSE
 #  make a forecast of delays for the time 12am-11pm (8 more hours) using forecast.HoltWinters()
 delayforecasts3 <- forecast.HoltWinters(delayforecasts2, h=8)
 plot.forecast(delayforecasts3, main="Forecasting Average Delay In Next 8 Hours", xlab="day (MonthDay)", ylab="Average delay in minutes")
+
+delayforecasts_final <- HoltWinters(delaytimeseries)
+delayforecasts_final
+plot(delayforecasts_final)
+plot(forecast(delayforecasts_final))
