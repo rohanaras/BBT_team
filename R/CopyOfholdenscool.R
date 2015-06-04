@@ -32,10 +32,13 @@ test$timestamp <- format(as.POSIXct(test$timestamp*0.001, origin="1970-01-01"), 
 # get hour from the timestamp when we collected the data 
 test$timehourly <- hour(test$timestamp)
 
-########## Initial Statistic Analysis ##############
+################################################################################
+#################### Initial Statistic Analysis ################################
+################################################################################
+
 # eliminated space that caused error, space might be due to copy and past
 # SQL Statement extract hour in the day and standard deviation of delays and average delay 
-mydata <- dbGetQuery(con, "SELECT EXTRACT(HOUR FROM TIMESTAMP WITH TIME ZONE 'epoch' + timestamp * INTERVAL '1 millisecond' - interval '7 hour'), count(*), TO_CHAR((stddev_samp(predicted_arrival - scheduled_arrival) || 'millisecond')::interval, 'HH24:MI:SS') AS STDDEV_DELAY, TO_CHAR((avg(predicted_arrival - scheduled_arrival) || 'millisecond')::interval, 'HH24:MI:SS') AS AVG_DELAY FROM arrival AS a, weather AS w WHERE a.weather_id = w.weather_id AND predicted_arrival - scheduled_arrival > 0 GROUP BY EXTRACT(HOUR FROM TIMESTAMP WITH TIME ZONE 'epoch' + timestamp * INTERVAL '1 millisecond' - interval '7 hour')")
+# mydata <- dbGetQuery(con, "SELECT EXTRACT(HOUR FROM TIMESTAMP WITH TIME ZONE 'epoch' + timestamp * INTERVAL '1 millisecond' - interval '7 hour'), count(*), TO_CHAR((stddev_samp(predicted_arrival - scheduled_arrival) || 'millisecond')::interval, 'HH24:MI:SS') AS STDDEV_DELAY, TO_CHAR((avg(predicted_arrival - scheduled_arrival) || 'millisecond')::interval, 'HH24:MI:SS') AS AVG_DELAY FROM arrival AS a, weather AS w WHERE a.weather_id = w.weather_id AND predicted_arrival - scheduled_arrival > 0 GROUP BY EXTRACT(HOUR FROM TIMESTAMP WITH TIME ZONE 'epoch' + timestamp * INTERVAL '1 millisecond' - interval '7 hour')")
 
 # pull raw data on the every late arrivals: stopid, routeid, route_name, trip_id, predicted_arrival, scheduled_arrival, timestamp
 data <- dbGetQuery(con, "SELECT stopid, routeid, route_name, timestamp, predicted_arrival, scheduled_arrival, predicted_arrival - scheduled_arrival as delay FROM arrival WHERE predicted_arrival - scheduled_arrival > 0")
@@ -74,17 +77,35 @@ df <- data.frame(data$timehourly, data$delay_minutes)
 out <- split(df, f=df$data.timehourly)
 
 # save delay in minutes data into sample_11am
-sample_11am <- out[[12]]$data.delay_minutes
+delay_11am <- out[[12]]$data.delay_minutes
 # save all delay in minutes for 
-sample_5pm <- out[[18]]$data.delay_minutes
+delay_5pm <- out[[18]]$data.delay_minutes
 
 # welch two sample t test, p-value < 2.2e-16
 # the mean of delay in minutes at 11am and 6pm are significantly different
-# we can say that
-t.test(sample_11am, sample_5pm)
+# we can say that at different time in a day, the delay in minutes are significantly different 
+t.test(delay_11am, delay_5pm)
 
+delay_1am <- out[[1]]$data.delay_minutes
+delay_2am <- out[[2]]$data.delay_minutes
+delay_12pm <- out[[13]]$data.delay_minutes
+delay_6pm <- out[[19]]$data.delay_minutes
+delay_7pm <- out[[20]]$data.delay_minutes
+delay_8am <- out[[9]]$data.delay_minutes
+# significant difference in mean delay in minutes between 1am to 2am; 
+t.test(delay_1am, delay_2am)
+# significant difference in mean delay in morning rush hour and afternoon rush hour 
+t.test(delay_8am, delay_5pm)
+# non-rush hour vs. afternoon rush hour 
+t.test(delay_11am, delay_5pm)
+# morning rush hour vs. afternoon rush hour 
+t.test(delay_5pm, delay_8am)
+# rush hour 5pm vs 6pm 
+t.test(delay_5pm, delay_6pm)
+# 6pm vs 7pm 
+t.test(delay_6pm,delay_7pm)
 # p-value < 2.2e-16
-t.test(sample_5pm$data.delay_minutes, data$delay_minutes)
+t.test(sample_5pm, data$delay_minutes)
 
 # class of average delay is character, and need to convert to date time in R 
 class(mydata$avg_delay)
@@ -96,7 +117,9 @@ avg_delay <- mydata$avg_delay
 # Error: is.atomic(x) is not TRUE
 t.test(mydata$date_part, mydata$avg_delay)
 
+################################################################################
 ########## Testing code to convert epoch time (in millisecond) to Data #########
+################################################################################
 val <- test$predicted_arrival[1]
 # convert epoch time to human readable Data Time 
 testTime <- as.POSIXct(val*0.001, origin="1970-01-01", tz="UTC")
