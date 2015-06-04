@@ -66,8 +66,8 @@ public class ReadCSV {
                     if(!zipSet.contains(data[0])) {
                         System.out.println("{" + "\n" + "values: z" + data[0] + ",");
                         System.out.println("key: \"" + data[0] + "\",");
-//                        System.out.println("color: \"" + generateRandomColor() + "\",");
-                        System.out.println("color: \"#ff7f0e\",");
+                        System.out.println("color: \"#" + generateRandomColor() + "\",");
+//                        System.out.println("color: \"#ff7f0e\",");
                         System.out.println("strokeWidth: 1.25 \n },");
                         zipSet.add(data[0]);
                     }
@@ -92,12 +92,10 @@ public class ReadCSV {
         System.out.println("Done");
     }
     public String generateRandomColor() {
-        String[] letters = "0123456789ABCDEF".split("");
-        String color = "#";
-        for (int i = 0; i < 6; i++ ) {
-            color += letters[Math.round((int)Math.random() * 15)];
-        }
-        return color;
+        String code = ""+(int)(Math.random()*256);
+        code = code+code+code;
+        int  i = Integer.parseInt(code);
+        return Integer.toHexString( 0x1000000 | i).substring(1).toUpperCase();
     }
     public int getSeconds(String hms) {
         String[] hmsParts = hms.split(":");

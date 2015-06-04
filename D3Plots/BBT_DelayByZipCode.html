@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.7.0/nv.d3.min.css" rel="stylesheet" type="text/css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.2/d3.min.js" charset="utf-8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.7.0/nv.d3.min.js"></script>
+
+    <style>
+        text {
+            font: 12px sans-serif;
+        }
+
+        svg {
+            display: block;
+        }
+
+        html,
+        body,
+        #chart1,
+        svg {
+            margin: 0px;
+            padding: 0px;
+            height: 100%;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="chart1">
+        <svg>
+        </svg>
+    </div>
+
+    <script>
+        historicalBarChart = [
+            {
+                key: "DelaybyZip",
+                values: [
+                    {
+                        "label": "98028",
+                        "value": 187
+                    }, {
+                        "label": "98092",
+                        "value": 58
+                    },
+                    {
+                        "label": "98155",
+                        "value": 127
+                    },
+                    {
+                        "label": "98032",
+                        "value": 192
+                    },
+                    {
+                        "label": "98109",
+                        "value": 181
+                    },
+                    {
+                        "label": "98108",
+                        "value": 204
+                    },
+                    {
+                        "label": "98158",
+                        "value": 114
+                    },
+                    {
+                        "label": "98106",
+                        "value": 174
+                    },
+                    {
+                        "label": "98133",
+                        "value": 154
+                    },
+                    {
+                        "label": "98146",
+                        "value": 148
+                    },
+                    {
+                        "label": "98033",
+                        "value": 150
+                    },
+                    {
+                        "label": "98102",
+                        "value": 215
+                    },
+                    {
+                        "label": "98422",
+                        "value": 74
+                    },
+                    {
+                        "label": "98107",
+                        "value": 183
+                    },
+                    {
+                        "label": "98178",
+                        "value": 215
+                    },
+                    {
+                        "label": "98204",
+                        "value": 246
+                    },
+                    {
+                        "label": "98125",
+                        "value": 188
+                    },
+                    {
+                        "label": "98074",
+                        "value": 202
+                    },
+                    {
+                        "label": "98115",
+                        "value": 203
+                    },
+                    {
+                        "label": "98039",
+                        "value": 142
+                    },
+                    {
+                        "label": "98188",
+                        "value": 126
+                    },
+                    {
+                        "label": "98148",
+                        "value": 141
+                    },
+                    {
+                        "label": "98117",
+                        "value": 251
+                    },
+                    {
+                        "label": "98118",
+                        "value": 224
+                    },
+                    {
+                        "label": "98053",
+                        "value": 138
+                    },
+                    {
+                        "label": "98008",
+                        "value": 168
+                    },
+                    {
+                        "label": "98103",
+                        "value": 198
+                    },
+                    {
+                        "label": "98070",
+                        "value": 176
+                    },
+                    {
+                        "label": "98026",
+                        "value": 139
+                    },
+                    {
+                        "label": "98136",
+                        "value": 151
+                    },
+                    {
+                        "label": "98056",
+                        "value": 181
+                    },
+                    {
+                        "label": "98077",
+                        "value": 320
+                    },
+                    {
+                        "label": "98006",
+                        "value": 153
+                    },
+                    {
+                        "label": "98004",
+                        "value": 113
+                    },
+                    {
+                        "label": "98001",
+                        "value": 138
+                    },
+                    {
+                        "label": "98030",
+                        "value": 115
+                    },
+                    {
+                        "label": "98101",
+                        "value": 167
+                    },
+                    {
+                        "label": "98166",
+                        "value": 113
+                    },
+                    {
+                        "label": "98181",
+                        "value": 134
+                    },
+                    {
+                        "label": "98029",
+                        "value": 131
+                    },
+                    {
+                        "label": "98065",
+                        "value": 216
+                    },
+                    {
+                        "label": "98040",
+                        "value": 180
+                    },
+                    {
+                        "label": "98164",
+                        "value": 189
+                    },
+                    {
+                        "label": "98003",
+                        "value": 165
+                    },
+                    {
+                        "label": "98043",
+                        "value": 65
+                    },
+                    {
+                        "label": "98055",
+                        "value": 161
+                    },
+                    {
+                        "label": "98116",
+                        "value": 141
+                    },
+                    {
+                        "label": "98275",
+                        "value": 213
+                    },
+                    {
+                        "label": "98154",
+                        "value": 47
+                    },
+                    {
+                        "label": "98031",
+                        "value": 133
+                    },
+                    {
+                        "label": "98027",
+                        "value": 204
+                    },
+                    {
+                        "label": "98122",
+                        "value": 167
+                    },
+                    {
+                        "label": "98019",
+                        "value": 229
+                    },
+                    {
+                        "label": "98005",
+                        "value": 118
+                    },
+                    {
+                        "label": "98057",
+                        "value": 149
+                    },
+                    {
+                        "label": "98144",
+                        "value": 175
+                    },
+                    {
+                        "label": "98121",
+                        "value": 172
+                    },
+                    {
+                        "label": "98126",
+                        "value": 139
+                    },
+                    {
+                        "label": "98058",
+                        "value": 160
+                    },
+                    {
+                        "label": "98011",
+                        "value": 204
+                    },
+                    {
+                        "label": "98105",
+                        "value": 182
+                    },
+                    {
+                        "label": "98052",
+                        "value": 132
+                    },
+                    {
+                        "label": "98087",
+                        "value": 352
+                    },
+                    {
+                        "label": "98104",
+                        "value": 162
+                    },
+                    {
+                        "label": "98112",
+                        "value": 176
+                    },
+                    {
+                        "label": "98208",
+                        "value": 523
+                    },
+                    {
+                        "label": "98177",
+                        "value": 213
+                    },
+                    {
+                        "label": "98119",
+                        "value": 170
+                    },
+                    {
+                        "label": "98007",
+                        "value": 135
+                    },
+                    {
+                        "label": "98075",
+                        "value": 193
+                    },
+                    {
+                        "label": "98072",
+                        "value": 226
+                    },
+                    {
+                        "label": "98134",
+                        "value": 201
+                    },
+                    {
+                        "label": "98198",
+                        "value": 148
+                    },
+                    {
+                        "label": "98023",
+                        "value": 105
+                    },
+                    {
+                        "label": "98002",
+                        "value": 134
+                    },
+                    {
+                        "label": "98038",
+                        "value": 198
+                    },
+                    {
+                        "label": "98022",
+                        "value": 66
+                    },
+                    {
+                        "label": "98059",
+                        "value": 197
+                    },
+                    {
+                        "label": "98021",
+                        "value": 169
+                    },
+                    {
+                        "label": "98203",
+                        "value": 208
+                    },
+                    {
+                        "label": "98199",
+                        "value": 224
+                    },
+                    {
+                        "label": "98045",
+                        "value": 188
+                    },
+                    {
+                        "label": "98168",
+                        "value": 217
+                    },
+                    {
+                        "label": "98042",
+                        "value": 173
+                    },
+                    {
+                        "label": "98034",
+                        "value": 190
+                    },
+                    {
+                        "label": "98195",
+                        "value": 174
+                    },
+                    {
+                        "label": "98010",
+                        "value": 163
+                    }]
+        }
+    ];
+
+        nv.addGraph(function () {
+            var chart = nv.models.discreteBarChart()
+                .x(function (d) {
+                    return d.label
+                })
+                .y(function (d) {
+                    return d.value
+                })
+                //                .valueFormat(function (d) {
+                //                    return formatoHHMMSS(d)
+                //                })
+                .staggerLabels(false)
+                //.staggerLabels(historicalBarChart[0].values.length > 8)
+                .showValues(true)
+                .duration(250);
+            chart.yAxis.axisLabel("Seconds delayed");
+            chart.xAxis.axisLabel("Zip Code").rotateLabels(-45);
+            //            .axisLabelDistance(0)
+            d3.select('#chart1 svg')
+                .datum(historicalBarChart)
+                .call(chart).append("text")
+                .attr("x", 600)
+                .attr("y", 20)
+                .attr("text-anchor", "middle")
+                .text("Average Delay by Zip Code");
+            nv.utils.windowResize(chart.update);
+
+            return chart;
+        });
+
+        function formatoHHMMSS(secs) {
+            var hours = parseInt(secs / 3600) % 24;
+            var minutes = parseInt(secs / 60) % 60;
+            var seconds = secs % 60;
+            return (minutes < 10 ? "0" + minutes : minutes) + ":" + (seconds < 10 ? "0" + seconds : seconds);
+        };
+    </script>
+</body>
+
+</html>
