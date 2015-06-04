@@ -66,8 +66,10 @@ public class ReadCSV {
                     if(!zipSet.contains(data[0])) {
                         System.out.println("{" + "\n" + "values: z" + data[0] + ",");
                         System.out.println("key: \"" + data[0] + "\",");
-                        System.out.println("color: \"#" + generateRandomColor() + "\",");
+//                        System.out.println("color: \"#" + generateRandomColor() + "\",");
 //                        System.out.println("color: \"#ff7f0e\",");
+//                        System.out.println("{" + "\n" + "key: \"" + data[0] + "\",");
+                        System.out.println("disabled: true,");
                         System.out.println("strokeWidth: 1.25 \n },");
                         zipSet.add(data[0]);
                     }
